@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Para rodar, execute:
-# chmod +x trabalho-final.sh
-# ./trabalho-final.sh
+# chmod +x aplicacao.sh
+# ./aplicacao.sh
 
 # atualizando o apt-get, que é um gerenciador de pacote do linux
 echo "Fazendo update do apt-get..."
