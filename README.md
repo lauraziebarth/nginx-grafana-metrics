@@ -9,15 +9,15 @@ Neste trabalho foi utilizado: Flask, Gunicorn, Nginx, Grafana+Prometheus.
 
 Comando pra criar arquivo vagrantfile: 
       
-      ~$ vagrant init ubuntu/bionic64
+      vagrant init ubuntu/bionic64
 
 Comando para fazer o build da VM: 
       
-      ~$ vagrant up
+      vagrant up
 
 Acessando a máquina pelo terminal: 
 
-      ~$ vagrant ssh
+      vagrant ssh
 
 <br>
 
@@ -30,7 +30,7 @@ Com as dependências acima instaladas, copie o arquivo `app.py`, para dentro da
 Agora, o servidor está pronto para ser executado e a aplicação acessada pelo navegador. <br>
 Para isso, via terminal execute o comando: 
 
-     ~$ python app.py
+     python app.py
 
 Acesse: http://localhost/report
 
@@ -43,7 +43,7 @@ Foi criado um arquivo de nome `wsgi.py` para fazer o vínculo entre a aplicaç
 
 Agora, para que seja feita a comunicação entre Gunicorn e Flask, execute: 
 
-      ~$ gunicorn --bind 0.0.0.0:5000 wsgi:app --reload
+      gunicorn --bind 0.0.0.0:5000 wsgi:app --reload
 
 <br>
 
@@ -51,7 +51,7 @@ Agora, para que seja feita a comunicação entre Gunicorn e Flask, execute:
 
 Por fim, para que a aplicação esteja sendo executada no NGINX, execute:
         
-      ~$ sudo apt-get install nginx
+      sudo apt-get install nginx
 
 Ao utilizar o servidor NGINX, blocos de servidores podem ser usados para encapsular detalhes de configuração e hospedar mais de um domínio fora de um único servidor. Com isso, o bloco criado para esta aplicação, através do comando `sudo nano /etc/nginx/sites-available/app`, se encontra no caminho `/etc/nginx/sites-available/app.`
 
@@ -70,15 +70,15 @@ Deve conter nesse arquivo somente:
 
 Agora, é necessário criar um link simbólico do caminho do bloco para a pasta de aplicações disponíveis através do seguinte comando:<br>
        
-       ~$ sudo ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled
+       sudo ln -s /etc/nginx/sites-available/app /etc/nginx/sites-enabled
 
 Devido ao fato de que o NGINX possui sua propria aplicação padrão, é necessária a exclusão do arquivo padrão: 
 
-       ~$ sudo rm /etc/nginx/sites-enabled/default
+       sudo rm /etc/nginx/sites-enabled/default
 
 Para que as alterações sejam identificadas, se faz necessário a reinicialização do serviço NGINX e pode ser realizado via terminal, através do comando: 
       
-      ~$ sudo systemctl restart nginx
+       sudo systemctl restart nginx
 
 Além disso, o firewall da máquina deve ser habilitado com o comando `sudo ufw allow 'Nginx Full'` para liberar acesso ao NGINX. 
 
